@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.my.roomproject.ui.phones.PhonesFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_new_phone" >
+        <action
+            android:id="@+id/action_navigation_home_to_updateFragment"
+            app:destination="@id/updateFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.my.roomproject.ui.newphone.NewPhoneFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_phones" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.my.roomproject.ui.notifications.SettingsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.my.roomproject.ui.updatephone.UpdateFragment"
+        android:label="@string/title_update"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="phone"
+            app:argType="com.my.roomproject.data.model.Phone" />
+    </fragment>
+</navigation>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Phone book</string>
+    <string name="title_home">Contacts</string>
+    <string name="title_dashboard">Add contact</string>
+    <string name="title_notifications">Settings</string>
+    <string name="title_update">Edit contact</string>
+    <string name="name_label">Name</string>
+    <string name="number_label">Phone number</string>
+    <string name="save_button_text">Save</string>
+    <string name="delete_button_text">Delete</string>
+    <string name="add_button_text">Add</string>
+    <string name="night_mode_text">Night mode</string>
+</resources>

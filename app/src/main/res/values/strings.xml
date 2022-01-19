@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Телефонная книга</string>
+    <string name="title_home">Контакты</string>
+    <string name="title_dashboard">Добавить Контакт</string>
+    <string name="title_notifications">Настройки</string>
+    <string name="title_update">Редактирование</string>
+    <string name="name_label">Имя</string>
+    <string name="number_label">Номер телефона</string>
+    <string name="save_button_text">Сохранить</string>
+    <string name="delete_button_text">Удалить</string>
+    <string name="add_button_text">Добавить</string>
+    <string name="night_mode_text">Ночная тема</string>
+</resources>
