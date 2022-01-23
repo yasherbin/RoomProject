@@ -11,4 +11,5 @@
     <string name="delete_button_text">Delete</string>
     <string name="add_button_text">Add</string>
     <string name="night_mode_text">Night mode</string>
+    <string name="add_photo_button_text">+ photo</string>
 </resources>

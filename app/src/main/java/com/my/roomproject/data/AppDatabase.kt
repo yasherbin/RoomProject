@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.my.roomproject.data.model.Phone
 
-@Database(entities = arrayOf(Phone::class), version = 1)
+@Database(entities = arrayOf(Phone::class), version = 2)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun phoneDao(): PhoneDao
 
@@ -20,11 +20,19 @@ abstract class AppDatabase: RoomDatabase() {
                     context,
                     AppDatabase::class.java,
                     "app_database")
+                    .fallbackToDestructiveMigration()
+//                    .addCallback(object : Callback() {
+//                        override fun onOpen(db: SupportSQLiteDatabase) {
+//                            super.onCreate(db)
+//                            db.execSQL("DELETE FROM phones")
+//                        }
+//                    })
                     .build()
                 INSTANCE = instance
 
                 instance
             }
         }
+
     }
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.my.roomproject.data.ImageStorage.Companion.loadImageFromStorage
 
 class PhonesAdapter (private val dataset: List<Phone>):
     RecyclerView.Adapter<PhonesAdapter.PhonesViewHolder>() {
@@ -16,6 +17,8 @@ class PhonesAdapter (private val dataset: List<Phone>):
         fun bind(phone: Phone) {
             binding.textViewName.text = phone.name
             binding.textViewNumber.text = phone.number
+            if (phone.imageUri!=null)
+            binding.imageView.setImageBitmap(loadImageFromStorage(phone.imageUri, phone.name))
         }
     }
 

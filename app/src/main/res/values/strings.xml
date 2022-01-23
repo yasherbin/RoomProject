@@ -10,4 +10,5 @@
     <string name="delete_button_text">Удалить</string>
     <string name="add_button_text">Добавить</string>
     <string name="night_mode_text">Ночная тема</string>
+    <string name="add_photo_button_text">+ фото</string>
 </resources>

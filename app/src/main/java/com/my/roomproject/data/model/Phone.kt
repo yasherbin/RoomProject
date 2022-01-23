@@ -11,5 +11,6 @@ data class Phone(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val name: String,
-    val number: String
+    val number: String,
+    val imageUri: String?
 ) : Parcelable
