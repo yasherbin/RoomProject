@@ -14,7 +14,6 @@ class PhonesFragment : Fragment() {
 
     private lateinit var phonesViewModel: PhonesViewModel
     private var _binding: FragmentPhonesBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,12 +21,10 @@ class PhonesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentPhonesBinding.inflate(inflater, container, false)
         phonesViewModel =
-            ViewModelProvider(this).get(PhonesViewModel::class.java)
-        val root: View = binding.root
-        return root
+            ViewModelProvider(requireActivity())[PhonesViewModel::class.java]
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,8 +32,7 @@ class PhonesFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         phonesViewModel.allPhones.observe(viewLifecycleOwner, { allPhones->
             binding.recyclerView.adapter=PhonesAdapter(allPhones)
-        }
-        )
+        })
     }
 
     override fun onDestroyView() {

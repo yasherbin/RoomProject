@@ -20,7 +20,6 @@ class SettingsFragment : Fragment() {
     ): View? {
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
         binding.themeSwitch.setOnCheckedChangeListener (null)
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
@@ -33,7 +32,7 @@ class SettingsFragment : Fragment() {
                 false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {

@@ -75,6 +75,7 @@
         android:layout_margin="8dp"
         android:hint="@string/number_label"
         android:textSize="24sp"
+        android:inputType="phone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_number"
         tools:text="Номер" />
