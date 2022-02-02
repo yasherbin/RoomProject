@@ -1,12 +1,12 @@
 package com.my.roomproject.ui.phones
 
-import com.my.roomproject.data.model.Phone
-import com.my.roomproject.databinding.PhonesListItemBinding
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.my.roomproject.data.ImageStorage.Companion.loadImageFromStorage
+import com.my.roomproject.data.model.Phone
+import com.my.roomproject.databinding.PhonesListItemBinding
 
 class PhonesAdapter (private val dataset: List<Phone>):
     RecyclerView.Adapter<PhonesAdapter.PhonesViewHolder>() {

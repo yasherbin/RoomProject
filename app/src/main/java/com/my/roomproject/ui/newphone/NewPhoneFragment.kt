@@ -1,7 +1,9 @@
 package com.my.roomproject.ui.newphone
 
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +11,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.my.roomproject.R
+import com.my.roomproject.data.ImageStorage.Companion.saveToInternalStorage
 import com.my.roomproject.data.model.Phone
 import com.my.roomproject.databinding.FragmentNewPhoneBinding
 import com.my.roomproject.viewmodel.PhonesViewModel
-import android.graphics.Bitmap
-import java.io.*
-import android.provider.MediaStore
-import com.my.roomproject.R
-import com.my.roomproject.data.ImageStorage.Companion.saveToInternalStorage
+import java.io.IOException
 
 class NewPhoneFragment : Fragment() {
 
@@ -25,14 +25,14 @@ class NewPhoneFragment : Fragment() {
     private val binding get() = _binding!!
     private var imageURI: String? = null
     private var bitmap: Bitmap?=null
-    private var flag = false
+    private var isImageChanged = false
 
     private val selectImageFromGalleryResult = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let { binding.imageView.setImageURI(uri)
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, uri)
                 binding.imageView.setImageBitmap(bitmap)
-                flag=true
+                isImageChanged=true
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -45,16 +45,15 @@ class NewPhoneFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         phonesViewModel =
-            ViewModelProvider(this).get(PhonesViewModel::class.java)
+            ViewModelProvider(requireActivity()).get(PhonesViewModel::class.java)
 
         _binding = FragmentNewPhoneBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
         binding.addButton.setOnClickListener {
             val name = binding.editTextName.text.toString().trim()
             val number = binding.editTextNumber.text.toString().trim()
             val s = "$name.jpg"
-            if (flag)
+            if (isImageChanged)
             imageURI=saveToInternalStorage(activity?.applicationContext,bitmap!!, s)
 
             if (name.isNotEmpty() && number.isNotEmpty()) {
@@ -74,7 +73,7 @@ class NewPhoneFragment : Fragment() {
             }
         }
         binding.addPhotoButton.setOnClickListener { selectImageFromGallery() }
-        return root
+        return binding.root
     }
 
     private fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")

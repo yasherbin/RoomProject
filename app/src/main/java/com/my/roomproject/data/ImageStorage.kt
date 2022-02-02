@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import java.io.*
-import java.lang.Exception
 
 class ImageStorage {
     companion object {
@@ -21,9 +21,7 @@ class ImageStorage {
                 e.printStackTrace()
             } finally {
                 try {
-                    if (fos != null) {
-                        fos.close()
-                    }
+                    fos?.close()
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
@@ -32,13 +30,22 @@ class ImageStorage {
         }
 
         fun loadImageFromStorage(path: String, name:String): Bitmap? {
-            try {
+            return try {
                 val f = File(path, "$name.jpg")
                 val b = BitmapFactory.decodeStream(FileInputStream(f))
-                return b
+                b
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
-                return null
+                null
+            }
+        }
+        fun deleteImage(path: String, name:String) {
+            try {
+                val fileName = "$name.jpg"
+                val fileToBeDeleted = File( path, fileName)
+                fileToBeDeleted.delete()
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }

@@ -4,22 +4,23 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.my.roomproject.R
+import com.my.roomproject.data.ImageStorage.Companion.deleteImage
 import com.my.roomproject.data.ImageStorage.Companion.loadImageFromStorage
 import com.my.roomproject.data.ImageStorage.Companion.saveToInternalStorage
 import com.my.roomproject.data.model.Phone
 import com.my.roomproject.databinding.FragmentUpdateBinding
 import com.my.roomproject.viewmodel.PhonesViewModel
-import java.io.*
+import java.io.IOException
 
 class UpdateFragment : Fragment() {
 
@@ -29,7 +30,7 @@ class UpdateFragment : Fragment() {
     private val args: UpdateFragmentArgs by navArgs()
     private lateinit var chosenPhone: Phone
     private lateinit var phonesViewModel: PhonesViewModel
-    private var flag = false
+    private var isImageChanged = false
     private var bitmap: Bitmap?=null
 
     private val selectImageFromGalleryResult = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -37,7 +38,7 @@ class UpdateFragment : Fragment() {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, uri)
                 binding.imageView.setImageBitmap(bitmap)
-                flag=true
+                isImageChanged=true
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -49,10 +50,9 @@ class UpdateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         phonesViewModel =
-            ViewModelProvider(this).get(PhonesViewModel::class.java)
+            ViewModelProvider(requireActivity())[PhonesViewModel::class.java]
         _binding = FragmentUpdateBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,11 +69,9 @@ class UpdateFragment : Fragment() {
             val number = binding.editTextNumber.text.toString().trim()
 
             if (name.isNotEmpty() && number.isNotEmpty()) {
-
-                if (flag) {
+                if (isImageChanged) {
                     val s = "$name.jpg"
                     val imageURI = saveToInternalStorage(activity?.applicationContext, bitmap!!, s)
-
                     val phone = Phone(chosenPhone.id, name, number, imageURI)
                     phonesViewModel.updatePhone(phone)
                 } else {
@@ -103,6 +101,8 @@ class UpdateFragment : Fragment() {
         val number = binding.editTextNumber.text.toString().trim()
         val phone = Phone(chosenPhone.id, name, number, chosenPhone.imageUri)
         phonesViewModel.deletePhone(phone)
+        if(!chosenPhone.imageUri.equals(null))
+        deleteImage(chosenPhone.imageUri!!, name)
     }
 
     private fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")
