@@ -1,61 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.updatephone.UpdateFragment">
 
     <TextView
         android:id="@+id/text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:padding="3dp"
+        android:layout_margin="@dimen/layout_margin"
+        android:padding="@dimen/view_padding"
         android:text="@string/name_label"
         android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textSize="@dimen/base_text_size"/>
 
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:layout_margin="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_name"
+        android:textSize="@dimen/base_text_size"
+        android:layout_margin="@dimen/layout_margin"
         android:hint="@string/name_label"
         tools:text="Имя"/>
+
     <TextView
         android:id="@+id/text_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:padding="3dp"
+        android:layout_margin="@dimen/layout_margin"
+        android:padding="@dimen/view_padding"
         android:text="@string/number_label"
         android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextName"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textSize="@dimen/base_text_size"/>
 
     <EditText
         android:id="@+id/editTextNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:layout_margin="8dp"
+        android:textSize="@dimen/base_text_size"
+        android:layout_margin="@dimen/layout_margin"
         android:inputType="phone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_number"
         android:hint="@string/number_label"
         tools:text="Номер"/>
 
@@ -63,43 +49,39 @@
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_margin="8dp"
-        android:src="@drawable/ic_baseline_face_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextNumber" />
+        android:layout_margin="@dimen/layout_margin"
+        android:src="@drawable/ic_baseline_face_24"/>
 
     <Button
         android:id="@+id/addPhotoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/layout_margin"
         android:text="@string/add_photo_button_text"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        android:textSize="@dimen/small_button_text_size"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
 
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:layout_margin="8dp"
-        android:padding="10dp"
-        android:text="@string/save_button_text"
-        app:layout_constraintEnd_toStartOf="@id/deleteButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addPhotoButton" />
+        android:textSize="@dimen/button_text_size"
+        android:layout_margin="@dimen/layout_margin"
+        android:padding="@dimen/button_padding"
+        android:text="@string/save_button_text"/>
     <Button
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:layout_margin="8dp"
-        android:padding="10dp"
-        android:text="@string/delete_button_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/saveButton"
-        app:layout_constraintTop_toBottomOf="@id/addPhotoButton" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:textSize="@dimen/button_text_size"
+        android:layout_margin="@dimen/layout_margin"
+        android:padding="@dimen/button_padding"
+        android:text="@string/delete_button_text"/>
+    </LinearLayout>
+
+</LinearLayout>
